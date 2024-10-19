@@ -18,13 +18,15 @@ public class Customer
         PhoneNumber = phone;
     }
 
-    public string GetCustomerInfo()
+    public void GetCustomerInfo()
     {
-        return $"\nID: {CustomerID}" +
-        $"\nName: {FirstName} {LastName}" +
+        Console.WriteLine(
+        $"Name: {FirstName} {LastName}" +
         $"\nAddress: {Address}" +
         $"\nEmail: {Email}" +
-        $"\nPhone Number: {PhoneNumber}";
+        $"\nPhone Number: {PhoneNumber}"
+        );
+        Program.Main();
     }
 
     public void UpdateCustomerInfo()
@@ -59,8 +61,6 @@ public class Customer
         if (answer == "Y")
         {
             Console.WriteLine("Customer information has successfully been updated!");
-            Program.Main();
-            Console.Clear();
         }
         else if (answer == "N")
         {

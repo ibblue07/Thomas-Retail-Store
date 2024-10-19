@@ -17,4 +17,9 @@ public class Food : IProduct
     {
         return Price;
     }
+
+    public override string ToString()
+    {
+        return $"Name: {ProductName}, Price: {Price}, Type: {Type}"; 
+    }
 }

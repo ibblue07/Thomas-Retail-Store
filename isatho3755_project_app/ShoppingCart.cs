@@ -41,32 +41,20 @@ public class ShoppingCart
 
     public void GetProducts()
     {
-        //Original code
-        /*  
         Console.WriteLine("Your shopping cart:");
-        foreach (IProduct product in products)
+
+        // Using a foreach loop to handle the case when the list is empty
+        if (products.Any())
         {
-            Console.WriteLine($"\nName: {product.ProductName}");
-            Console.WriteLine($"\nPrice: {product.GetPrice():C}");
-            Console.WriteLine($"\nType: {product.Type}");
-        }
-        Program.Main();
-        */
-        //Modified code
-        Console.WriteLine("Your shopping cart:");
-        if (products.Count == 0)
-        {
-            Console.WriteLine("Your cart is empty.");
+            foreach (var product in products)
+            {
+                Console.WriteLine("\nProduct Details:");
+                Console.WriteLine(product.ToString());
+            }
         }
         else
         {
-            foreach (IProduct product in products)
-            {
-                Console.WriteLine("\nProduct Details:");
-                Console.WriteLine($"Name: {product.ProductName}");
-                Console.WriteLine($"Price: {product.GetPrice():C}"); // Formats the price as currency
-                Console.WriteLine($"Type: {product.Type}");
-            }
+            Console.WriteLine("Your cart is empty.");
         }
     }
     public void UpdateProduct()
