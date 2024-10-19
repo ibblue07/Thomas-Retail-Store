@@ -26,7 +26,6 @@ public class Customer
         $"\nEmail: {Email}" +
         $"\nPhone Number: {PhoneNumber}"
         );
-        Program.Main();
     }
 
     public void UpdateCustomerInfo()
