@@ -7,15 +7,15 @@ public class Customer
     public string Email { get; set; }
     public long PhoneNumber { get; set; }
     
-    public Customer(int ID, string fname, string lname, 
-    string address, string email, long phone)
+    public Customer(int ID, string firstName, string lastName, 
+    string address, string email, long phoneNumber)
     {
         CustomerID = ID;
-        FirstName = fname;
-        LastName = lname;
+        FirstName = firstName;
+        LastName = lastName;
         Address = address;
         Email = email;
-        PhoneNumber = phone;
+        PhoneNumber = phoneNumber;
     }
 
     public void GetCustomerInfo()
@@ -30,40 +30,43 @@ public class Customer
 
     public void UpdateCustomerInfo()
     { 
-        Console.Write("Enter first name: ");
-        string newFName = Console.ReadLine();
-        Console.Write("Enter last name: ");
-        string newLName = Console.ReadLine();
-        Console.Write("Enter address: ");
-        string newAddress = Console.ReadLine();
-        Console.Write("Enter email: ");
-        string newEmail = Console.ReadLine();
-        Console.Write("Enter phone number: ");
-        long newPhone = Convert.ToInt64(Console.ReadLine());
-
-        FirstName = newFName;
-        LastName = newLName;
-        Address = newAddress;
-        Email = newEmail;
-        PhoneNumber = newPhone;
-
-        Console.WriteLine
-        (
-            $"\nName: {newFName} {newLName}" +
-            $"\nAddress: {newAddress}" +
-            $"\nEmail: {newEmail}" +
-            $"\nPhone Number: {newPhone}"
-        );
-
-        Console.WriteLine("Would you like to save your changes? (Y/N)");
-        string answer = Console.ReadLine();
-        if (answer == "Y")
+        Console.WriteLine("Update Customer Information");
+        
+        Console.Write("Enter new First Name (leave blank to keep current): ");
+        string firstNameInput = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(firstNameInput))
         {
-            Console.WriteLine("Customer information has successfully been updated!");
+            FirstName = firstNameInput;
         }
-        else if (answer == "N")
+
+        Console.Write("Enter new Last Name (leave blank to keep current): ");
+        string lastNameInput = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(lastNameInput))
         {
-            UpdateCustomerInfo();
+            LastName = lastNameInput;
         }
+
+        Console.Write("Enter new Address (leave blank to keep current): ");
+        string addressInput = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(addressInput))
+        {
+            Address = addressInput;
+        }
+
+        Console.Write("Enter new Email (leave blank to keep current): ");
+        string emailInput = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(emailInput))
+        {
+            Email = emailInput;
+        }
+
+        Console.Write("Enter new Phone Number (leave blank to keep current): ");
+        string phoneInput = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(phoneInput) && long.TryParse(phoneInput, out long phoneNumber))
+        {
+            PhoneNumber = phoneNumber;
+        }
+
+        Console.WriteLine("Customer information updated successfully.");
     }
 }
