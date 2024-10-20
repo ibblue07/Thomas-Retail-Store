@@ -24,12 +24,15 @@ public class Customer
         PhoneNumber = phoneNumber;
     }
 
-    public string GetCustomerInfo()
+    public void GetCustomerInfo()
     {
-        return $"Name: {FirstName} {LastName}" +
+        Console.WriteLine
+        (
+        $"Name: {FirstName} {LastName}" +
         $"\nAddress: {Address}" +
         $"\nEmail: {Email}" +
-        $"\nPhone Number: {PhoneNumber}";
+        $"\nPhone Number: {PhoneNumber}"
+        );
     }
 
     public void UpdateCustomerInfo()
