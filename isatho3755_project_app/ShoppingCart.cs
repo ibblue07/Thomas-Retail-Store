@@ -101,8 +101,6 @@ public class ShoppingCart
 
     public void GetProducts()
     {
-        Console.WriteLine("Products in cart:");
-
         // Using a foreach loop to handle the case when the list is empty
         if (products.Any())
         {
