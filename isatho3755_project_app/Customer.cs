@@ -1,3 +1,9 @@
+/*
+    Name: Isaiah Thomas
+    Date: 10/19/2024
+    SDC320 Project Class Implementation
+    Description: The Customer class stores all of the customer properties and get & update methods.
+*/
 public class Customer
 {
     public int CustomerID { get; set; }
@@ -18,55 +24,53 @@ public class Customer
         PhoneNumber = phoneNumber;
     }
 
-    public void GetCustomerInfo()
+    public string GetCustomerInfo()
     {
-        Console.WriteLine(
-        $"Name: {FirstName} {LastName}" +
+        return $"Name: {FirstName} {LastName}" +
         $"\nAddress: {Address}" +
         $"\nEmail: {Email}" +
-        $"\nPhone Number: {PhoneNumber}"
-        );
+        $"\nPhone Number: {PhoneNumber}";
     }
 
     public void UpdateCustomerInfo()
-    { 
-        Console.WriteLine("Update Customer Information");
-        
+    {   
         Console.Write("Enter new First Name (leave blank to keep current): ");
-        string firstNameInput = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(firstNameInput))
+        string newFName = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(newFName))
         {
-            FirstName = firstNameInput;
+            FirstName = newFName;
         }
 
         Console.Write("Enter new Last Name (leave blank to keep current): ");
-        string lastNameInput = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(lastNameInput))
+        string newLName = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(newLName))
         {
-            LastName = lastNameInput;
+            LastName = newLName;
         }
 
         Console.Write("Enter new Address (leave blank to keep current): ");
-        string addressInput = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(addressInput))
+        string newAddress = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(newAddress))
         {
-            Address = addressInput;
+            Address = newAddress;
         }
 
         Console.Write("Enter new Email (leave blank to keep current): ");
-        string emailInput = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(emailInput))
+        string newEmail = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(newEmail))
         {
-            Email = emailInput;
+            Email = newEmail;
         }
 
         Console.Write("Enter new Phone Number (leave blank to keep current): ");
-        string phoneInput = Console.ReadLine();
-        if (!string.IsNullOrWhiteSpace(phoneInput) && long.TryParse(phoneInput, out long phoneNumber))
+        string newPhoneString = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(newPhoneString) && long.TryParse(newPhoneString, out long newPhoneNumber))
         {
-            PhoneNumber = phoneNumber;
+            PhoneNumber = newPhoneNumber;
         }
 
         Console.WriteLine("Customer information updated successfully.");
+        Console.WriteLine("\nUpdated customer info:");
+        GetCustomerInfo();
     }
 }

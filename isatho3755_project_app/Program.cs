@@ -1,3 +1,9 @@
+/*
+    Name: Isaiah Thomas
+    Date: 10/19/2024
+    SDC320 Project Class Implementation
+    Description: The main Program class.
+*/
 public class Program
 {
     

@@ -1,3 +1,9 @@
+/*
+    Name: Isaiah Thomas
+    Date: 10/19/2024
+    SDC320 Project Class Implementation
+    Description: The Electronics class is derived from the IProduct interface class.
+*/
 public class Electronics : IProduct
 {
     public int ProductID { get; set; }
@@ -16,5 +22,10 @@ public class Electronics : IProduct
     public double GetPrice()
     {
         return Price;
+    }
+
+    public override string ToString()
+    {
+        return $"Name: {ProductName}\nPrice: {Price}\nType: {Type}"; 
     }
 }

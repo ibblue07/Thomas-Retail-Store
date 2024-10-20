@@ -1,3 +1,9 @@
+/*
+    Name: Isaiah Thomas
+    Date: 10/19/2024
+    SDC320 Project Class Implementation
+    Description: The Clothing class is derived from the IProduct interface class.
+*/
 public class Clothing : IProduct
 {
     public int ProductID { get; set; }
@@ -20,5 +26,11 @@ public class Clothing : IProduct
     public double GetPrice()
     {
         return Price;
+    }
+
+    public override string ToString()
+    {
+        return $"Name: {ProductName}\n Price: {Price}\n Type: {Type}" +
+        $"Color: {Color}\n Size: {Size}"; 
     }
 }

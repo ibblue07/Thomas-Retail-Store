@@ -1,3 +1,9 @@
+/*
+    Name: Isaiah Thomas
+    Date: 10/19/2024
+    SDC320 Project Class Implementation
+    Description: The Food class is derived from the IProduct interface class.
+*/
 public class Food : IProduct
 {
     public int ProductID { get; set; }
@@ -20,6 +26,6 @@ public class Food : IProduct
 
     public override string ToString()
     {
-        return $"Name: {ProductName}, Price: {Price}, Type: {Type}"; 
+        return $"Name: {ProductName}\nPrice: {Price}\nType: {Type}"; 
     }
 }
