@@ -6,6 +6,7 @@
 */
 public class Clothing : IProduct
 {
+    // Define the properties
     public int ProductID { get; set; }
     public string ProductName { get; set; }
     public double Price { get; set; }
@@ -30,7 +31,7 @@ public class Clothing : IProduct
 
     public override string ToString()
     {
-        return $"Name: {ProductName}\n Price: {Price}\n Type: {Type}" +
-        $"Color: {Color}\n Size: {Size}"; 
+        return $"Name: {ProductName}\nPrice: {Price}\nType: {Type}" +
+        $"Color: {Color}\nSize: {Size}"; 
     }
 }

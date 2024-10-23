@@ -6,6 +6,7 @@
 */
 public class Electronics : IProduct
 {
+    // Define the properties
     public int ProductID { get; set; }
     public string ProductName { get; set; }
     public double Price { get; set; }

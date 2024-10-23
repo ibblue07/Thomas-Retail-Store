@@ -6,6 +6,7 @@
 */
 public class Customer
 {
+    // Define the properties
     public int CustomerID { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -73,7 +74,9 @@ public class Customer
         }
 
         Console.WriteLine("Customer information updated successfully.");
+        // Print updated customer info
         Console.WriteLine("\nUpdated customer info:");
         GetCustomerInfo();
+        Console.WriteLine();
     }
 }
