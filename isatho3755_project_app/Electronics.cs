@@ -1,7 +1,7 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/19/2024
-    SDC320 Project Class Implementation
+    Date: 10/27/2024
+    SDC320 Project Database Implementation
     Description: The Electronics class is derived from the IProduct interface class.
 */
 public class Electronics : IProduct
@@ -15,6 +15,13 @@ public class Electronics : IProduct
     public Electronics(int id, string name, double price, string type)
     {
         ProductID = id;
+        ProductName = name;
+        Price = price;
+        Type = type;
+    }
+
+    public Electronics(string name, double price, string type)
+    {
         ProductName = name;
         Price = price;
         Type = type;

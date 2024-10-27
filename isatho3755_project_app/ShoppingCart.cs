@@ -1,7 +1,7 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/19/2024
-    SDC320 Project Class Implementation
+    Date: 10/27/2024
+    SDC320 Project Database Implementation
     Description: The ShoppingCart class stores a list of all the Products in the Customer's cart.
 */
 public class ShoppingCart : ShoppingCartBase
@@ -51,6 +51,12 @@ public class ShoppingCart : ShoppingCartBase
                 products.Add(new Electronics(nextProductID, productName, price, type));
                 
                 Console.WriteLine("Product added");
+                // Add to database
+                if (Program.conn != null)
+                {
+                    ProductDB.AddProduct(Program.conn, new Electronics(productName, price, type));
+                }    
+                
                 Console.WriteLine("\nProduct Details:");
                 GetProducts();
                 Console.WriteLine();
@@ -70,6 +76,11 @@ public class ShoppingCart : ShoppingCartBase
                 products.Add(new Food(nextProductID, productName, price, type));
                 
                 Console.WriteLine("Product added");
+                // Add to database
+                if (Program.conn != null)
+                {
+                    ProductDB.AddProduct(Program.conn, new Food(productName, price, type));
+                } 
                 Console.WriteLine("\nProduct Details:");
                 GetProducts();
                 Console.WriteLine();
@@ -95,6 +106,11 @@ public class ShoppingCart : ShoppingCartBase
                 products.Add(new Clothing(nextProductID, productName, price, type, color, size));
                 
                 Console.WriteLine("Product added");
+                // Add to database
+                if (Program.conn != null)
+                {
+                    ProductDB.AddProduct(Program.conn, new Clothing(productName, price, type, color, size));
+                } 
                 Console.WriteLine("\nProduct Details:");
                 GetProducts();
                 Console.WriteLine();
@@ -110,6 +126,7 @@ public class ShoppingCart : ShoppingCartBase
     public override void GetProducts()
     {
         // Checks if there are any products in the cart
+        Console.WriteLine("Products printed from cart:");
         if (products.Any())
         {
             foreach (var product in products)
@@ -117,6 +134,9 @@ public class ShoppingCart : ShoppingCartBase
                 Console.WriteLine(product.ToString());
                 Console.WriteLine();
             }
+
+            Console.WriteLine("Products printed from Products table:");
+            Program.PrintProducts(products);
         }
         else
         {
@@ -223,7 +243,8 @@ public class ShoppingCart : ShoppingCartBase
             Console.Write("Enter the new Price (leave blank to keep current): ");
             string newPriceString = Console.ReadLine();
             double newPrice;
-            if (double.TryParse(newPriceString, out newPrice) && newPrice > 0)
+            if (!string.IsNullOrWhiteSpace(newPriceString) && 
+            double.TryParse(newPriceString, out newPrice) && newPrice > 0)
             {
                 productToUpdate.Price = newPrice;
             }
@@ -270,6 +291,10 @@ public class ShoppingCart : ShoppingCartBase
             }
 
             Console.WriteLine("\nProduct has been successfully updated.");
+            if (Program.conn != null)
+            {
+                ProductDB.UpdateProduct(Program.conn, productToUpdate);
+            }
             // Print updated product info
             Console.WriteLine("\nUpdated Product Details:");
             Console.WriteLine(productToUpdate.ToString());
@@ -301,6 +326,10 @@ public class ShoppingCart : ShoppingCartBase
             IProduct removedProduct = products[choice - 1];
             products.RemoveAt(choice - 1);
             Console.WriteLine($"Removed {removedProduct.ProductName} from your cart.");
+            if (Program.conn != null)
+            {
+                ProductDB.DeleteProduct(Program.conn, removedProduct.ProductID);
+            }
         }
         else if (choice == 0)
         {

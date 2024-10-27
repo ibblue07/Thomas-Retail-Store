@@ -1,7 +1,7 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/19/2024
-    SDC320 Project Class Implementation
+    Date: 10/27/2024
+    SDC320 Project Database Implementation
     Description: The Customer class stores all of the customer properties and get & update methods.
 */
 public class Customer
@@ -25,6 +25,16 @@ public class Customer
         PhoneNumber = phoneNumber;
     }
 
+    public Customer(string firstName, string lastName, 
+    string address, string email, long phoneNumber)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Address = address;
+        Email = email;
+        PhoneNumber = phoneNumber;
+    }
+
     public void GetCustomerInfo()
     {
         Console.WriteLine
@@ -34,15 +44,23 @@ public class Customer
         $"\nEmail: {Email}" +
         $"\nPhone Number: {PhoneNumber}"
         );
+        Console.WriteLine();
+
+        Console.WriteLine("Customers printed from Customer table:");
+        if (Program.conn != null)
+        {
+            Program.PrintCustomers(CustomerDB.GetAllCustomers(Program.conn));
+        }
     }
 
-    public void UpdateCustomerInfo()
+    public void UpdateCustomerInfo(Customer c)
     {   
         Console.Write("Enter new First Name (leave blank to keep current): ");
         string newFName = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newFName))
         {
             FirstName = newFName;
+            c.FirstName = newFName;
         }
 
         Console.Write("Enter new Last Name (leave blank to keep current): ");
@@ -50,6 +68,7 @@ public class Customer
         if (!string.IsNullOrWhiteSpace(newLName))
         {
             LastName = newLName;
+            c.LastName = newLName;
         }
 
         Console.Write("Enter new Address (leave blank to keep current): ");
@@ -57,6 +76,7 @@ public class Customer
         if (!string.IsNullOrWhiteSpace(newAddress))
         {
             Address = newAddress;
+            c.Address = newAddress;
         }
 
         Console.Write("Enter new Email (leave blank to keep current): ");
@@ -64,6 +84,7 @@ public class Customer
         if (!string.IsNullOrWhiteSpace(newEmail))
         {
             Email = newEmail;
+            c.Email = newEmail;
         }
 
         Console.Write("Enter new Phone Number (leave blank to keep current): ");
@@ -71,6 +92,12 @@ public class Customer
         if (!string.IsNullOrWhiteSpace(newPhoneString) && long.TryParse(newPhoneString, out long newPhoneNumber))
         {
             PhoneNumber = newPhoneNumber;
+            c.PhoneNumber = newPhoneNumber;
+        }
+
+        if (Program.conn != null)
+        {
+            CustomerDB.UpdateCustomer(Program.conn, c);
         }
 
         Console.WriteLine("Customer information updated successfully.");

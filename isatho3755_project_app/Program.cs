@@ -1,16 +1,30 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/19/2024
-    SDC320 Project Class Implementation
+    Date: 10/27/2024
+    SDC320 Project Database Implementation
     Description: The main Program class.
 */
+using System.Data.SQLite;
+using System.Security.Cryptography.X509Certificates;
+
 public abstract class Program : ShoppingCart
 {
-    
+    public const string dbName = "IsaiahThomas.db";
+    public static SQLiteConnection conn;
+    public static Customer customer;
+
     public static void Main()
     {
-        Customer customer = new Customer(1, "Isaiah", "Thomas", "123 Main Street", "isatho3755@students.ecpi.edu", 7026952744);
+        conn = SQLiteDatabase.Connect(dbName);
+        if (conn != null)
+        {
+            ProductDB.CreateTable(conn);
+            CustomerDB.CreateTable(conn);
+            CustomerDB.AddCustomer(conn, new Customer("Isaiah", "Thomas", "123 Main Street", "isatho3755@students.ecpi.edu", 7026952744));
+        }
+        customer = new Customer(1, "Isaiah", "Thomas", "123 Main Street", "isatho3755@students.ecpi.edu", 7026952744);
         ShoppingCart cart = new ShoppingCart();
+        
         
         int choice;
         do 
@@ -47,7 +61,7 @@ public abstract class Program : ShoppingCart
                         customer.GetCustomerInfo();
                         break;
                     case 6:
-                        customer.UpdateCustomerInfo();
+                        customer.UpdateCustomerInfo(customer);
                         break;
                     case 7:
                         cart.Checkout();
@@ -67,4 +81,46 @@ public abstract class Program : ShoppingCart
             }
         } while (choice != 8);
     }
+    
+    public static void PrintProducts(List<IProduct> products)
+    {
+        foreach (IProduct p in products)
+        {
+            PrintProduct(p);
+        }
+    }
+
+    public static void PrintProduct(IProduct p)
+    {
+        if (p is Clothing clothing)
+        {
+            Console.WriteLine("Product " + clothing.ProductID + ": ");
+            Console.WriteLine("Name: " + clothing.ProductName + "\nPrice: " + clothing.Price
+            + "\nType: " + clothing.Type + "\nColor: " + clothing.Color + "\n");
+        }
+        else
+        {
+            Console.WriteLine("Product " + p.ProductID + ": ");
+            Console.WriteLine("Name: " + p.ProductName + "\nPrice: " + p.Price
+            + "\nType: " + p.Type + "\n");
+        }
+    }
+
+    public static void PrintCustomers(List<Customer> customers)
+    {
+        foreach (Customer c in customers)
+        {
+            PrintCustomer(c);
+        }
+    }
+
+    public static void PrintCustomer(Customer c)
+    {
+        Console.WriteLine("Customer " + c.CustomerID + ": ");
+        Console.WriteLine("Name: " + c.FirstName + " " + c.LastName);
+        Console.WriteLine("Address: " + c.Address);
+        Console.WriteLine("Email: " + c.Email);
+        Console.WriteLine("Phone Number: " + c.PhoneNumber);
+    }
 }
+
