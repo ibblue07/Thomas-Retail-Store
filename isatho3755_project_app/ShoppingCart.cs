@@ -134,7 +134,7 @@ public class ShoppingCart : ShoppingCartBase
                 Console.WriteLine(product.ToString());
                 Console.WriteLine();
             }
-
+            // Print from table
             Console.WriteLine("Products printed from Products table:");
             Program.PrintProducts(products);
         }
@@ -291,6 +291,7 @@ public class ShoppingCart : ShoppingCartBase
             }
 
             Console.WriteLine("\nProduct has been successfully updated.");
+            // Update PRoducts table
             if (Program.conn != null)
             {
                 ProductDB.UpdateProduct(Program.conn, productToUpdate);
@@ -326,6 +327,7 @@ public class ShoppingCart : ShoppingCartBase
             IProduct removedProduct = products[choice - 1];
             products.RemoveAt(choice - 1);
             Console.WriteLine($"Removed {removedProduct.ProductName} from your cart.");
+            // Remove product from the Products table
             if (Program.conn != null)
             {
                 ProductDB.DeleteProduct(Program.conn, removedProduct.ProductID);

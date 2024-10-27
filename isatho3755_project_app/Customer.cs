@@ -45,8 +45,9 @@ public class Customer
         $"\nPhone Number: {PhoneNumber}"
         );
         Console.WriteLine();
-
+        
         Console.WriteLine("Customers printed from Customer table:");
+        //Print from Customers table
         if (Program.conn != null)
         {
             Program.PrintCustomers(CustomerDB.GetAllCustomers(Program.conn));
@@ -94,7 +95,7 @@ public class Customer
             PhoneNumber = newPhoneNumber;
             c.PhoneNumber = newPhoneNumber;
         }
-
+        // Update Customer table
         if (Program.conn != null)
         {
             CustomerDB.UpdateCustomer(Program.conn, c);
