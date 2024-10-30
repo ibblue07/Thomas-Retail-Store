@@ -6,7 +6,7 @@
 */
 using System.Data.SQLite;
 
-public abstract class Program : ShoppingCart
+public class Program : ShoppingCart
 {
     public const string dbName = "IsaiahThomas.db";
     public static SQLiteConnection conn;
