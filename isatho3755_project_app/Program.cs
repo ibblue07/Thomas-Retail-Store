@@ -1,11 +1,10 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/27/2024
-    SDC320 Project Database Implementation
+    Date: 10/29/2024
+    SDC320 Project Course Project
     Description: The main Program class.
 */
 using System.Data.SQLite;
-using System.Security.Cryptography.X509Certificates;
 
 public abstract class Program : ShoppingCart
 {
@@ -29,9 +28,10 @@ public abstract class Program : ShoppingCart
         int choice;
         do 
         {
+            Console.WriteLine("Welcome to Isaiah's Retail Store System");
             Console.WriteLine
             (
-                "1. Add Product" +
+                "\n1. Add Product" +
                 "\n2. View Products" +
                 "\n3. Update Product" +
                 "\n4. Delete Product" +

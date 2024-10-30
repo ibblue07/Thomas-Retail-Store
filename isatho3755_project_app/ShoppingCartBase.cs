@@ -1,7 +1,7 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/27/2024
-    SDC320 Project Database Implementation
+    Date: 10/29/2024
+    SDC320 Project Course Project
     Description: The ShoppingCartBase class is an abstract class that defines most of the main methods for the ShoppingCart class.
 */
 public abstract class ShoppingCartBase

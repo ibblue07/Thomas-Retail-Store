@@ -1,7 +1,7 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/27/2024
-    SDC320 Project Database Implementation
+    Date: 10/29/2024
+    SDC320 Project Course Project
     Description: The SQLiteDatabase class will connect to a SQLite database.
 */
 using System.Data.SQLite;

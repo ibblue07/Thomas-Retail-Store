@@ -1,7 +1,7 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/27/2024
-    SDC320 Project Database Implementation
+    Date: 10/29/2024
+    SDC320 Project Course Project
     Description: The ShoppingCart class stores a list of all the Products in the Customer's cart.
 */
 public class ShoppingCart : ShoppingCartBase
@@ -29,11 +29,12 @@ public class ShoppingCart : ShoppingCartBase
         int category = Convert.ToInt32(Console.ReadLine());
         
         //Define user input variables
-        string productName;
+        string? productName;
+        string? priceString;
         double price;
-        string type;
-        string color;
-        string size;
+        string? type;
+        string? color;
+        string? size;
         
         // Input validation for product information
         switch (category)
@@ -41,12 +42,30 @@ public class ShoppingCart : ShoppingCartBase
             case 1: // Electronics
                 Console.WriteLine("Enter the name:");
                 productName = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(productName))
+                {
+                    Console.WriteLine("Type cannot be empty. Please enter a valid type.");
+                    productName = Console.ReadLine();
+                }
 
                 Console.WriteLine("Enter the price:");
-                price = Convert.ToDouble(Console.ReadLine());
+                priceString = Console.ReadLine();
+                while (!double.TryParse(priceString, out price) || price < 0)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid price (a non-negative number):");
+                    priceString = Console.ReadLine();
+                }
+
+                price = Convert.ToDouble(priceString);
+                
 
                 Console.WriteLine("Enter the type:");
                 type = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(type))
+                {
+                    Console.WriteLine("Type cannot be empty. Please enter a valid type.");
+                    type = Console.ReadLine();
+                }
 
                 products.Add(new Electronics(nextProductID, productName, price, type));
                 
@@ -66,12 +85,29 @@ public class ShoppingCart : ShoppingCartBase
             case 2: // Food
                 Console.WriteLine("Enter the name:");
                 productName = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(productName))
+                {
+                    Console.WriteLine("Type cannot be empty. Please enter a valid type.");
+                    productName = Console.ReadLine();
+                }
 
                 Console.WriteLine("Enter the price:");
-                price = Convert.ToDouble(Console.ReadLine());
+                priceString = Console.ReadLine();
+                while (!double.TryParse(priceString, out price) || price < 0)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid price (a non-negative number):");
+                    priceString = Console.ReadLine();
+                }
+                
+                price = Convert.ToDouble(priceString);
 
                 Console.WriteLine("Enter the type:");
                 type = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(type))
+                {
+                    Console.WriteLine("Type cannot be empty. Please enter a valid type.");
+                    type = Console.ReadLine();
+                }
                 
                 products.Add(new Food(nextProductID, productName, price, type));
                 
@@ -90,18 +126,44 @@ public class ShoppingCart : ShoppingCartBase
             case 3: // Clothing
                 Console.WriteLine("Enter the name:");
                 productName = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(productName)) // Check if the input is empty or whitespace
+                {
+                    Console.WriteLine("Product name cannot be empty. Please enter a valid name:");
+                    productName = Console.ReadLine();
+                }
 
                 Console.WriteLine("Enter the price:");
-                price = Convert.ToDouble(Console.ReadLine());
+                priceString = Console.ReadLine();
+                while (!double.TryParse(priceString, out price) || price < 0) // Validate that input is a non-negative number
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid price (a non-negative number):");
+                    priceString = Console.ReadLine();
+                }
+                price = Convert.ToDouble(priceString);
 
                 Console.WriteLine("Enter the type:");
                 type = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(type)) // Check if the input is empty or whitespace
+                {
+                    Console.WriteLine("Type cannot be empty. Please enter a valid type:");
+                    type = Console.ReadLine();
+                }
 
                 Console.WriteLine("Enter the color:");
                 color = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(color)) // Check if the input is empty or whitespace
+                {
+                    Console.WriteLine("Type cannot be empty. Please enter a valid type:");
+                    color = Console.ReadLine();
+                }
 
                 Console.WriteLine("Enter the size:");
                 size = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(size))
+                {
+                    Console.WriteLine("Size cannot be empty. Please enter a valid size:");
+                    size = Console.ReadLine();
+                }
                 
                 products.Add(new Clothing(nextProductID, productName, price, type, color, size));
                 
@@ -164,10 +226,21 @@ public class ShoppingCart : ShoppingCartBase
             Console.WriteLine();
             
             Console.WriteLine("Would you like to purchase the following item(s)? (Y/N)");
-            string choice = Console.ReadLine();
+            string? choice = Console.ReadLine();
             if (choice == "Y")
             {
                 Console.WriteLine("Thank you for your purchase!");
+                // Remove each product from the Products table
+                if (Program.conn != null)
+                {
+                    foreach (var product in products)
+                    {
+                        ProductDB.DeleteProduct(Program.conn, product.ProductID);
+                    }
+                }
+
+                // Clear the products from the cart after successful checkout
+                products.Clear();
             }
             else if (choice == "N")
             {
@@ -230,7 +303,7 @@ public class ShoppingCart : ShoppingCartBase
         if (productToUpdate != null)
         {
             Console.Write("Enter the new Product Name (leave blank to keep current): ");
-            string newProductName = Console.ReadLine();
+            string? newProductName = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(newProductName))
             {
                 productToUpdate.ProductName = newProductName;
@@ -241,7 +314,7 @@ public class ShoppingCart : ShoppingCartBase
             }
 
             Console.Write("Enter the new Price (leave blank to keep current): ");
-            string newPriceString = Console.ReadLine();
+            string? newPriceString = Console.ReadLine();
             double newPrice;
             if (!string.IsNullOrWhiteSpace(newPriceString) && 
             double.TryParse(newPriceString, out newPrice) && newPrice > 0)
@@ -255,7 +328,7 @@ public class ShoppingCart : ShoppingCartBase
             
 
             Console.WriteLine("Enter the new Type (leave blank to keep current): ");
-            string newType = Console.ReadLine();
+            string? newType = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(newType))
             {
                 productToUpdate.Type = newType;
@@ -268,7 +341,7 @@ public class ShoppingCart : ShoppingCartBase
             if (productToUpdate is Clothing clothing)
             {
                 Console.Write("Enter the new Color (leave blank to keep current): ");
-                string newColor = Console.ReadLine();
+                string? newColor = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(newColor))
                 {
                     clothing.Color = newColor;
@@ -279,7 +352,7 @@ public class ShoppingCart : ShoppingCartBase
                 }   
 
                 Console.WriteLine("Enter the new Size (leave blank to keep current): ");
-                string newSize = Console.ReadLine();
+                string? newSize = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(newSize))
                 {
                     clothing.Size = newSize;
@@ -319,7 +392,6 @@ public class ShoppingCart : ShoppingCartBase
         // Display product list
         Console.WriteLine("Products in cart:");
         GetProducts();
-        Console.WriteLine();
 
         Console.WriteLine("\nEnter the number of the product you want to remove (or 0 to cancel):");
         if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= products.Count)

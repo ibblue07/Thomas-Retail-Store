@@ -1,7 +1,7 @@
 /*
     Name: Isaiah Thomas
-    Date: 10/27/2024
-    SDC320 Project Database Implementation
+    Date: 10/29/2024
+    SDC320 Course Project
     Description: The Customer class stores all of the customer properties and get & update methods.
 */
 public class Customer
@@ -57,7 +57,7 @@ public class Customer
     public void UpdateCustomerInfo(Customer c)
     {   
         Console.Write("Enter new First Name (leave blank to keep current): ");
-        string newFName = Console.ReadLine();
+        string? newFName = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newFName))
         {
             FirstName = newFName;
@@ -65,7 +65,7 @@ public class Customer
         }
 
         Console.Write("Enter new Last Name (leave blank to keep current): ");
-        string newLName = Console.ReadLine();
+        string? newLName = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newLName))
         {
             LastName = newLName;
@@ -73,7 +73,7 @@ public class Customer
         }
 
         Console.Write("Enter new Address (leave blank to keep current): ");
-        string newAddress = Console.ReadLine();
+        string? newAddress = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newAddress))
         {
             Address = newAddress;
@@ -81,7 +81,7 @@ public class Customer
         }
 
         Console.Write("Enter new Email (leave blank to keep current): ");
-        string newEmail = Console.ReadLine();
+        string? newEmail = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newEmail))
         {
             Email = newEmail;
@@ -89,7 +89,7 @@ public class Customer
         }
 
         Console.Write("Enter new Phone Number (leave blank to keep current): ");
-        string newPhoneString = Console.ReadLine();
+        string? newPhoneString = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(newPhoneString) && long.TryParse(newPhoneString, out long newPhoneNumber))
         {
             PhoneNumber = newPhoneNumber;
